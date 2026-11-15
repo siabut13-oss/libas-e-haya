@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#031318">
+<title>Libas-e-Haya | Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../assets/css/rtl.css"><link rel="stylesheet" href="../assets/css/light.css"><link rel="stylesheet" href="../assets/css/cursor.css"></head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div id="glow" aria-hidden="true"></div>
+
+<!-- ============ LOGIN ============ -->
+<div class="login" id="login">
+  <form class="login-card tilt" id="loginForm">
+    <div class="mark"><img data-logo alt="Libas-e-Haya"></div>
+    <h1>Libas-e-Haya <span>Admin</span></h1>
+    <p>Dashboard kholne ke liye password likhein.</p>
+    <div class="status" id="conn" role="status">Connection check ho raha hai…</div>
+    <div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required autofocus></div>
+    <div class="err" id="loginErr" role="alert"></div>
+    <button class="btn primary" id="loginBtn" style="width:100%;height:48px" type="submit">Unlock dashboard</button>
+  </form>
+</div>
+
+<!-- ============ APP ============ -->
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <div class="brand"><span class="mark"><img data-logo alt=""></span><div><b>Libas-e-Haya</b><small>ADMIN</small></div></div>
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <i class="ind" id="ind"></i>
+      <button class="tab on" data-view="overview"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>Overview</button>
+      <button class="tab" data-view="products"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>Products</button>
+      <button class="tab" data-view="orders"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6"/></svg>Orders<span class="n" id="nNew" hidden>0</span></button>
+      <button class="tab" data-view="messages"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>Messages</button>
+    </nav>
+    <div class="sp"></div>
+    <button class="cmdbtn" id="openCmd" type="button"><span>Quick search</span><kbd>Ctrl K</kbd></button>
+    <button class="tab logout" id="logout"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5v16h4M16 8l4 4-4 4M20 12H9"/></svg>Log out</button>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h2 id="title">Overview</h2><div class="sub" id="sub"></div></div>
+      <div class="acts">
+        <span class="live" id="live"><i></i><b id="liveTxt">Connecting…</b></span>
+        <button class="btn" id="refresh">↻ Refresh</button>
+        <button class="btn primary" id="addP" hidden>+ Add product</button>
+        <button class="btn mobile-out" id="logout2">Log out</button>
+      </div>
+    </div>
+    <div id="view"></div>
+  </main>
+</div>
+
+<!-- product modal -->
+<div class="scrim" id="pm"><form class="modal" id="pForm" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <h3 id="pmTitle">Add product</h3>
+  <input type="hidden" id="fId">
+  <div class="upl">
+    <div class="pv" id="fPrev"></div>
+    <div>
+      <div class="field" style="margin-bottom:8px"><label for="fImg">Image URL</label><input id="fImg" placeholder="https://… ya Drive link"></div>
+      <button type="button" class="btn sm" id="fUpBtn">⬆ Upload image</button>
+      <input type="file" id="fFile" accept="image/*" hidden>
+      <div class="hint" id="fHint">Upload karein ya link paste karein. Upload ki hui image Google Drive mein save hoti hai.</div>
+    </div>
+  </div>
+  <div class="field"><label for="fName">Product name</label><input id="fName" required maxlength="120"></div>
+  <div class="two">
+    <div class="field"><label for="fPrice">Price (Rs.)</label><input id="fPrice" type="number" min="0" step="1" required></div>
+    <div class="field"><label for="fStock">Stock (quantity)</label><input id="fStock" type="number" min="0" step="1" required></div>
+  </div>
+  <div class="two">
+    <div class="field"><label for="fCat">Category</label><input id="fCat" placeholder="Unstitched Suit, Lawn…"></div>
+    <div class="field"><label for="fStatus">Status</label><select id="fStatus"><option>Active</option><option>Hidden</option></select></div>
+  </div>
+  <div class="field"><label for="fDesc">Description</label><textarea id="fDesc" rows="3" maxlength="600"></textarea></div>
+  <div class="m-foot"><button type="button" class="btn" id="pCancel">Cancel</button><button class="btn primary" id="pSave" type="submit">Save product</button></div>
+</form></div>
+
+<!-- command palette -->
+<div class="cmd" id="cmd" role="dialog" aria-modal="true" aria-label="Quick search">
+  <div class="cmd-box">
+    <input id="cmdIn" placeholder="Type a command… (Overview, Orders, Add product)" autocomplete="off">
+    <div class="cmd-list" id="cmdList"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../assets/js/admin-1.js"></script>
+<script src="../assets/js/admin-2.js"></script>
+<script src="../assets/js/admin-extras.js"></script><script src="../assets/js/dict-dynamic.js"></script><script src="../assets/js/auto-i18n.js"></script><script src="../assets/js/theme.js"></script></body>
+</html>

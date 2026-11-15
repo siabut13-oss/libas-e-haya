@@ -1,0 +1,1 @@
+LH.toast=function(m,bad){var d=document.createElement('div');d.className='toast-x'+(bad?' bad':'');d.textContent=m;document.body.appendChild(d);setTimeout(function(){d.remove()},3200)};

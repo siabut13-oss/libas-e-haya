@@ -1,0 +1,7 @@
+#lhLang{position:fixed;inset-block-end:18px;inset-inline-start:18px;z-index:9999;height:44px;min-width:56px;padding:0 16px;border-radius:999px;border:1px solid rgba(47,224,216,.5);background:rgba(5,32,41,.92);color:#eaf3f0;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#lhLang:hover{background:#2fe0d8;color:#03120d}
+html[dir=rtl] body{font-family:'Noto Nastaliq Urdu','Manrope',sans-serif;line-height:2.1}
+html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3,html[dir=rtl] h4,html[dir=rtl] .logo-text{font-family:'Noto Nastaliq Urdu',serif;line-height:1.9}
+html[dir=rtl] .logo-text{letter-spacing:0}html[dir=rtl] .btn,html[dir=rtl] .nav a{line-height:1.6}
+html[dir=rtl] input,html[dir=rtl] textarea,html[dir=rtl] select{text-align:start}
+.product .p-img,.product h3{cursor:pointer}

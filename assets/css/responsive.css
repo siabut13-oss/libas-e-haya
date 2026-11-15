@@ -1,0 +1,37 @@
+/* Responsive hardening: phones (320px) -> tablets -> laptops -> ultra-wide. Loaded last on every store page. */
+html,body{max-width:100%;overflow-x:clip}
+img,video,canvas,svg{max-width:100%}
+.skip{inset-inline-start:0;transform:translateY(-250%);transition:transform .2s}.skip:focus{transform:none}
+.glass{padding:clamp(16px,5vw,28px)}
+.cart-g>*,.two>*,.pd>*,.lx-g>*,.hero-g>*,.trio>*{min-width:0}
+.page input,.page textarea,.page select,.filters input,.filters select{max-width:100%;width:100%;box-sizing:border-box}
+.filters select{width:auto}.filters input{width:auto}
+.pgrid{grid-template-columns:repeat(auto-fill,minmax(min(250px,100%),1fr))}
+.rel{grid-template-columns:repeat(auto-fill,minmax(min(180px,100%),1fr))}
+.wrap,.s-wrap{padding-inline:clamp(14px,4vw,24px);box-sizing:border-box}
+.s-wrap{width:min(1180px,100%)}
+/* header */
+@media(min-width:901px) and (max-width:1080px){.s-nav{gap:18px}.s-nav a{font-size:.8rem}}
+@media(max-width:600px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pc-b{padding:12px}.pc-b h3{font-size:.92rem}.pc-f{flex-wrap:wrap}.pc-add{padding:8px 12px;font-size:.76rem}.pc-f b{font-size:.98rem}}
+@media(max-width:480px){.s-bar{gap:8px;height:64px}.s-act{gap:6px}.s-ic{width:38px;height:38px}.s-ic.txt{padding:0 12px;font-size:.78rem}
+ .s-logo{font-size:1.15rem;gap:8px}.s-logo img{width:34px;height:34px}.s-logo small{display:none}
+ .cl{grid-template-columns:64px 1fr auto;gap:10px;padding:10px}.cl img,.cl .pc-ph{width:64px;height:82px}
+ .toggle button{padding:8px 14px;font-size:.74rem}.hero-b .btn,.cta-b .btn{padding:13px 22px}.hero-b{gap:10px}
+ .strip span{padding:9px 16px;font-size:.8rem}.trio .num{font-size:2.6rem}.pd-btns .btn{flex:1 1 100%}
+ .s-foot{margin-top:30px}.s-fg{padding-block:34px 20px}}
+@media(max-width:400px){.s-logo span{display:none}.pgrid{gap:10px}}
+@media(max-width:340px){.pgrid{grid-template-columns:1fr}}
+/* hero on small / short screens */
+@media(max-width:899px){.lx{padding-top:28px}.stage{max-width:380px}.lx .lead{margin:16px 0 24px}}
+@media(max-height:520px) and (orientation:landscape){.lx{padding-block:20px 90px}.stage{max-width:300px}.s-bar{height:56px}}
+/* touch devices: bigger tap targets, no hover-only reliance */
+@media(pointer:coarse){.qs button,.pd-qty button{min-width:42px;min-height:42px}.pc-add{padding:11px 16px}.pc-w{width:44px;height:44px}.chip{padding:10px 16px}.s-nav a,.s-drawer a{min-height:44px;display:flex;align-items:center}}
+/* notches / safe areas */
+.site-h{padding-top:env(safe-area-inset-top,0)}#lhLang,#lhTheme{inset-block-end:calc(18px + env(safe-area-inset-bottom,0px))}
+/* large screens */
+@media(min-width:1500px){.wrap,.s-wrap{width:min(1360px,100%);max-width:1360px}.pgrid{grid-template-columns:repeat(4,minmax(0,1fr))}.lead{max-width:62ch}}
+@media(min-width:2000px){html{font-size:112.5%}.wrap,.s-wrap{width:min(1560px,100%);max-width:1560px}}
+/* print: just the content */
+@media print{.site-h,.s-foot,#lhTheme,#lhLang,#cDot,#cRing,.demo-bar,.lx-bg,.wave{display:none!important}body{background:#fff;color:#000}}
+/* page titles: eyebrow on its own line above the heading */
+.pg-hero .eyebrow,.sec-h .eyebrow{display:flex}.pg-hero h1.split,.sec-h h2.split{display:block}
